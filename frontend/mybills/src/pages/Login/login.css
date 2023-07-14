@@ -1,0 +1,125 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    /* background: url('../../assets/login-barckground.gif'); */
+    position: relative;
+    background: linear-gradient(-20deg, #030303, #626262, #664b95,
+    #8a4bd7, #d87cde,#cb75d3);
+    background-size: 300%;
+    animation: animated_text 6s ease-in-out infinite;
+    -moz-animation: animated_text 6s ease-in-out infinite;
+    -webkit-animation: animated_text 6s ease-in-out infinite;
+}
+
+@keyframes animated_text{
+    0%{
+        background-position: 0px 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0px 50%;
+    }
+}
+
+.login-card {
+    background: #ffffff68;
+    border: 1px solid rgb(141, 141, 141);
+    border-radius: 15px;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    backdrop-filter: blur(25px);
+}
+
+.login-card h1 {
+    /* color: rgb(59, 59, 59); */
+    color: #fff;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    font-size: 48px;
+}
+
+.input-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-box label {
+    font-size: 20px;
+    width: 100%;
+    height: 25px;
+    align-self: flex-start;
+    color: #fff;
+}
+
+.input-box:nth-child(2) {
+    margin-bottom: 2rem;
+}
+
+.input-box:nth-child(3) {
+    margin-bottom: 2.5rem;
+}
+
+.login-card input:nth-child(2) {
+    width: 100%;
+    height: 80%;
+    outline: none;
+    border-bottom: 1px solid black;
+    transition: all .3s ease-in-out;
+    background: #fff;
+    border: 1px solid rgb(135, 135, 135);
+    border-radius: 5px;
+    font-size: 19px;
+    padding: 8px;
+}
+
+.login-card input:nth-child(2):focus-within {
+    background: #fff;
+    border-color: rgba(65, 130, 251, 0.8);
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(117,149,245,1);
+    -moz-box-shadow: 0px 0px 11px 3px rgba(117,149,245,1);
+    box-shadow: 0px 0px 11px 3px rgba(117,149,245,1);
+}
+
+.login-card input:nth-child(4) {
+    width: 80%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    height: 50px;
+    background: #c126f5ba;
+    font-size: 25px;
+    margin-bottom: 1.5rem;
+    color: rgb(62, 62, 62);
+    transition: all .3s ease-in-out;
+    
+}
+
+.login-card input:nth-child(4):hover {
+    background: #8c1db1;
+    color: #dbdada;
+}
+
+.login-card span{
+    color: #fff;
+    font-size: 16px;
+}
+
+.login-card a {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: underline;
+}
