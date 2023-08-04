@@ -1,20 +1,35 @@
+import { useState } from 'react';
+import BaseInput from '../../components/BaseInput';
+import SubmitButton from '../../components/SubmitButton';
 import './login.css';
 
 function Login() {
+
+  const[ userName, setUsername ] = useState('');
+  const[ pass, setPass ] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(`Dados: ${ userName }, ${ pass } `);
+  }
+
   return (
     <div className='login-page'>
-        <form className="login-card">
-                <h1>MyBills</h1>
-            <div className="input-box">
-                <label>Nome</label>
-                <input type="text" name="nome" />
-            </div>
-            <div className="input-box">
-                <label>Senha</label>
-                <input type="password" name="senha"/>
-            </div>
-
-            <input type="submit" value="Login" className="login-btn"/>
+        <form className="login-card" onSubmit={ handleLogin }>
+            <h1>MyBills</h1>
+            <BaseInput 
+              labelText="Nome" 
+              type="text" 
+              placeHolder="Digite seu nome" 
+              changeState={setUsername}
+            />
+            <BaseInput 
+              labelText="Senha"
+              type="password" 
+              placeHolder="*******" 
+              changeState={setPass}
+            />
+            <SubmitButton text="Entrar" />
             <span>
             <a href='/register'> Ainda não possui cadastro? se cadastre aqui</a>
             </span>
