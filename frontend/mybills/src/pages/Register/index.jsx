@@ -1,10 +1,14 @@
-import './login.css';
+// import './login.css';
 
-function Login() {
+function Register() {
   return (
     <div className='login-page'>
         <form className="login-card">
                 <h1>MyBills</h1>
+            <div className="input-box">
+                <label>Email</label>
+                <input type="email" name="email" />
+            </div>
             <div className="input-box">
                 <label>Nome</label>
                 <input type="text" name="nome" />
@@ -14,13 +18,13 @@ function Login() {
                 <input type="password" name="senha"/>
             </div>
 
-            <input type="submit" value="Login" className="login-btn"/>
+            <input type="submit" value="Cadastrar" className="login-btn"/>
             <span>
-            <a href='/register'> Ainda não possui cadastro? se cadastre aqui</a>
+            <a href='/'> Já possui cadastro? Faça login! </a>
             </span>
         </form>
     </div>
   )
 }
 
-export default Login
+export default Register
