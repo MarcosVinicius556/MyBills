@@ -14,14 +14,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@Entity
+@Table( name = "tb_bills" )
 public class Bills implements Serializable {
     
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "bills_sequence" )
     @SequenceGenerator( name = "bills_sequence", sequenceName = "bills_sequence", allocationSize = 1 )
@@ -30,8 +34,8 @@ public class Bills implements Serializable {
     @Column( name = "description", length = 255 )
     private String description;
 
-    @Column( name = "value", precision = 4, scale = 2 )
-    private BigDecimal value;
+    @Column( name = "amountspent", precision = 11, scale = 4 )
+    private BigDecimal amountSpent;
 
     @Column( name = "date", columnDefinition = "DATE" )
     private Instant date;
@@ -50,7 +54,7 @@ public class Bills implements Serializable {
 
     public Bills(String description, BigDecimal value, Instant date, Integer paymentType, User user) {
         this.description = description;
-        this.value = value;
+        this.amountSpent = value;
         this.date = date;
         this.paymentType = paymentType;
         this.user = user;

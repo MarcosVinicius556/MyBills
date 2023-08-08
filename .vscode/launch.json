@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MybillsApplication<mybills>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dev.marcos.mybills.MybillsApplication",
+            "projectName": "mybills",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

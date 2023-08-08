@@ -1,4 +1,5 @@
 import { createContext, useReducer, useState } from "react";
+import apiService from "../services/apiService";
 
 const userData = {
     id: '',
@@ -12,7 +13,17 @@ const userData = {
 const applicationReducer = (state, action) => {
     switch(action.type) {
         case 'login':
-            console.log(action.payload);
+            let userLoginDTO = action.payload;
+            apiService.post('login', {
+                data: {
+                    userName: userLoginDTO.username,
+                    pass: userLoginDTO.pass
+                }
+            }).then((promisse) => {
+                console.log(promisse.data)
+            }).catch((error) => {
+                console.log(error);
+            });
             return{
                 ...state, //mantem o estado anterior
                 //Realiza a ação desejada

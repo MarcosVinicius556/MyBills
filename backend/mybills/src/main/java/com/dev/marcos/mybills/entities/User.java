@@ -30,6 +30,8 @@ import lombok.Setter;
 } )
 public class User implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "user_sequence" )
     @SequenceGenerator( name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1 )
@@ -47,10 +49,10 @@ public class User implements UserDetails {
     @Column( name = "pass", length = 64 )
     private String pass;
 
-    @Column( name = "balance", precision = 4, scale = 2 )
+    @Column( name = "balance", precision = 11, scale = 4 )
     private BigDecimal balance;
 
-    @OneToMany( fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "user", fetch = FetchType.EAGER )
     private List<Bills> bills = new ArrayList<>();
 
     public User() {
