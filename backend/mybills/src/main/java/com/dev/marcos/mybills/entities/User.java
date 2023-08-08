@@ -1,5 +1,7 @@
 package com.dev.marcos.mybills.entities;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,20 +9,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table( name = "tb_user", indexes = {
     @Index( columnList = "id" )
@@ -31,11 +34,24 @@ public class User implements UserDetails {
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "user_sequence" )
     @SequenceGenerator( name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1 )
     private long id;
+
+    @Column( name = "name", length = 128 )
     private String name;
+
+    @Column( name = "telephone", length = 24 )
     private String telephone;
 
+    @Column( name = "username", length = 64 )
     private String userName;
+
+    @Column( name = "pass", length = 64 )
     private String pass;
+
+    @Column( name = "balance", precision = 4, scale = 2 )
+    private BigDecimal balance;
+
+    @OneToMany( fetch = FetchType.EAGER )
+    private List<Bills> bills = new ArrayList<>();
 
     public User() {
 

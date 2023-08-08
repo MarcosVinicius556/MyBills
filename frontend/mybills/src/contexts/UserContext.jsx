@@ -12,7 +12,7 @@ const userData = {
 const applicationReducer = (state, action) => {
     switch(action.type) {
         case 'login':
-            console.log('Efetuando login da aplicação');
+            console.log(action.payload);
             return{
                 ...state, //mantem o estado anterior
                 //Realiza a ação desejada
@@ -27,10 +27,11 @@ export const UserContext = createContext({});
  */
 export const UserProvider = ({ children }) => {
 
+    //Disponibilizando reducer para a aplicação poder utilizar
     const value = useReducer(applicationReducer, userData)
 
     return(
-        <UserContext.Provider>
+        <UserContext.Provider value={{ value }}>
             { children }
         </UserContext.Provider>
     );

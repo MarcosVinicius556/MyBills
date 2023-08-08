@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import BaseInput from '../../components/BaseInput';
 import SubmitButton from '../../components/SubmitButton';
+import { UserContext } from '../../contexts/UserContext';
 import './login.css';
 
 function Login() {
@@ -8,9 +9,16 @@ function Login() {
   const[ userName, setUsername ] = useState('');
   const[ pass, setPass ] = useState('');
 
+  const{ value: userReducer } = useContext(UserContext);
+  const[ state, dispatch ] = userReducer;
+
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(`Dados: ${ userName }, ${ pass } `);
+    let userData = {
+      username: userName,
+      pass: pass,
+    }
+    dispatch({ type:"login", payload:{userData} });
   }
 
   return (
