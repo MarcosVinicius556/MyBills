@@ -1,24 +1,34 @@
 import { useState, useContext } from 'react';
 import BaseInput from '../../components/BaseInput';
 import SubmitButton from '../../components/SubmitButton';
-import { UserContext } from '../../contexts/UserContext';
+import LoadingButton from '../../components/LoadingButton';
+import { AuthContext } from '../../contexts/AuthContext';
 import './login.css';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
   const[ userName, setUsername ] = useState('');
   const[ pass, setPass ] = useState('');
+  const[ loading, setLoading ] = useState(false);
 
-  const{ value: userReducer } = useContext(UserContext);
-  const[ state, dispatch ] = userReducer;
+  const{ user, login } = useContext(AuthContext);
 
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+
+  async function handleLogin (e) {
     e.preventDefault();
-    let userData = {
-      username: userName,
-      pass: pass,
+    if(userName === '' || pass === ''){
+      toast.error('Informe todos os campos!');
+      return;
     }
-    dispatch({ type:"login", payload:{userData} });
+
+    setLoading(true);
+    await login(userName, pass);
+    setLoading(false);
+    navigate('/dashboard');
+
   }
 
   return (
@@ -37,7 +47,15 @@ function Login() {
               placeHolder="*******" 
               changeState={setPass}
             />
-            <SubmitButton text="Entrar" />
+            {
+              loading ?
+              (
+                <LoadingButton />    
+              ) : (
+                <SubmitButton text="Entrar" />
+              )
+            }
+            
             <span>
             <a href='/register'> Ainda não possui cadastro? se cadastre aqui</a>
             </span>

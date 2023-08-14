@@ -1,14 +1,20 @@
-import { BrowserRouter } from "react-router-dom"
-import RoutesApp from "./routes/RoutesApp"
-import { UserContext, UserProvider } from "./contexts/UserContext"
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import RoutesApp from "./routes/RoutesApp";
+
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import LogoutButton from "./components/LogoutButton";
 
 function App() {
 
   return (
     <BrowserRouter>
-      <UserProvider>
+      <AuthProvider>
+        <ToastContainer />
         <RoutesApp />
-      </UserProvider>
+        <LogoutButton />
+      </AuthProvider>
     </BrowserRouter>
   )
 }
