@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import BaseInput from "../../components/BaseInput";
 import SubmitButton from "../../components/SubmitButton";
 
 function Register() {
 
+  const{ register } = useContext(AuthContext);
   const[ email, setEmail ] = useState('');
   const[ username, setUsername ] = useState('');
   const[ password, setPassword ] = useState('');
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(`Dados: ${ email }, ${ username }, ${ password } `)
+    let userLoginDTO = {
+      username: email, 
+      name: username, 
+      password: password
+    }
+
+    register(userLoginDTO);
   }
 
   return (

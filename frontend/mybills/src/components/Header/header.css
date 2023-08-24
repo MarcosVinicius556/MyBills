@@ -59,6 +59,7 @@ header {
     margin-bottom: 5px;
     border-bottom: 1px solid gray;
     color: #fff;
+    transition: all .2s ease-in-out;
 }
 
 .header-options a:hover {

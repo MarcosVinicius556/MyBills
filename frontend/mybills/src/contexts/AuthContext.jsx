@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import apiService from "../services/apiService";
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({});
 
@@ -8,6 +9,7 @@ export const AuthContext = createContext({});
  * Irá prover os dados do usuário para a aplicação
  */
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate(); 
     const[ user, setUser ] = useState({});
 
     async function login(userName, pass) {
@@ -41,10 +43,25 @@ export const AuthProvider = ({ children }) => {
                     });
     }
 
+    async function register(userLoginDTO) {
+        await apiService.post('/users/register', userLoginDTO)
+              .then((response) => {
+                console.log(response);
+                toast.success('Usuário cadastrado com sucesso!\n Você será redirecionado para o login em alguns segundos...');
+                setTimeout(() => {
+                    navigate('/');
+                }, 6000);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+    }
+
     return(
         <AuthContext.Provider value={{ 
             user,
-            login
+            login,
+            register
             }}>
             { children }
         </AuthContext.Provider>

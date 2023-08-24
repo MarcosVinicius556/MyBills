@@ -3,8 +3,11 @@ import './home.css';
 
 function Home() {
   return (
-    <div>
+    <div className='home-container'>
       <Header />
+      <div className="content">
+
+      </div>
     </div>
   )
 }
