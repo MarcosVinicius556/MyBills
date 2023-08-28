@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import apiService from "../services/apiService";
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
+import { HttpStatusCode } from "axios";
 
 export const AuthContext = createContext({});
 
@@ -43,7 +44,8 @@ export const AuthProvider = ({ children }) => {
                     });
     }
 
-    async function register(userLoginDTO) {
+    async function userRegister(userLoginDTO) {
+        let isRegistered =  false;
         await apiService.post('/users/register', userLoginDTO)
               .then((response) => {
                 console.log(response);
@@ -51,17 +53,26 @@ export const AuthProvider = ({ children }) => {
                 setTimeout(() => {
                     navigate('/');
                 }, 6000);
+                isRegistered = true;
               })
               .catch((error) => {
-                console.log(error);
+                if(error.response.status == HttpStatusCode.Conflict) {
+                    toast.error('email já cadastrado');
+                    isRegistered = false;
+                    return;
+                }
+
+                toast.error(`Ocorreu um erro inesperado ao salvar o registro ${error}`);
+                isRegistered = false;
               });
+        return isRegistered;
     }
 
     return(
         <AuthContext.Provider value={{ 
             user,
             login,
-            register
+            userRegister
             }}>
             { children }
         </AuthContext.Provider>

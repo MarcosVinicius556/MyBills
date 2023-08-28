@@ -1,14 +1,13 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
+import { useForm } from 'react-hook-form';
 import { AuthContext } from "../../contexts/AuthContext";
 import BaseInput from "../../components/BaseInput";
 import SubmitButton from "../../components/SubmitButton";
 
 function Register() {
 
-  const{ register } = useContext(AuthContext);
-  const[ email, setEmail ] = useState('');
-  const[ username, setUsername ] = useState('');
-  const[ password, setPassword ] = useState('');
+  const{ userRegister } = useContext(AuthContext);
+  const{ register, handleSubmit } = useForm();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -18,30 +17,33 @@ function Register() {
       password: password
     }
 
-    register(userLoginDTO);
+    let isRegistered =  register(userLoginDTO);
+    if(!isRegistered) {
+      setEmail
+    }
   }
 
   return (
     <div className='login-page'>
-        <form className="login-card" onSubmit={handleSignUp}>
+        <form className="login-card" onSubmit={handleSubmit(handleSignUp)}>
             <h1>MyBills</h1>
             <BaseInput 
               labelText="Email" 
               type="email" 
               placeHolder="email@email.com" 
-              changeState={setEmail}
+              { ...register('email')}
             />
             <BaseInput 
               labelText="Nome" 
               type="text" 
-              placeHolder="Digite seu nome" 
-              changeState={setUsername}
+              placeHolder="Digite seu nome"
+              { ...register('name')}
             />
             <BaseInput 
               labelText="Senha" 
               type="password" 
               placeHolder="******" 
-              changeState={setPassword}
+              { ...register('password')}
             />
             <SubmitButton text="Cadastrar" />
             <span>
