@@ -12,6 +12,7 @@ header {
 }
 
 
+
 .show-button {
     width: 50px;
     height: 50px;
@@ -70,6 +71,14 @@ header {
 
 .expand-container {
     width: 250px;
+    z-index: 99;
+}
+
+.block-background {
+    background: rgba(0, 0, 0, 0.151);
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 .show-container {
@@ -77,10 +86,11 @@ header {
 }
 
 .change-menu-btn {
-    background: #e2e2e2;
+    background: #666666;
     border-radius: 5px;
     align-self: flex-end;
     transition: all .2s ease-in-out;
+    box-shadow: 0px 0px 5px 1px;
 }
 
 .change-menu-btn:hover {

@@ -14,6 +14,19 @@
     -webkit-animation: animated_text 6s ease-in-out infinite;
 }
 
+.error-message {
+    border: 2px solid rgb(199, 154, 154);
+    background: #f888889d;
+    border-radius: 5px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-top: -1em;
+    margin-bottom: 1em;
+}
+
 @keyframes animated_text{
     0%{
         background-position: 0px 50%;
